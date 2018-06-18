@@ -10,6 +10,7 @@
         <module>Base</module>
 		<module>JPAHibernateWithH2</module>
 		<module>JPAHibernateWithMySQL</module>
+		<module>JPAGenericHibernate</module>
 	</modules>
     <packaging>pom</packaging>
 

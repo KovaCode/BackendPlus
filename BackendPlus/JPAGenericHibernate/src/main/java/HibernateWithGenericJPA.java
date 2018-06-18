@@ -1,17 +1,20 @@
-package com.kovacic;
-
+import com.kovacic.repository.StudentRepository;
 import org.hibernate.annotations.common.util.impl.LoggerFactory;
 import org.jboss.logging.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class HibernateWithJPAWithH2 {//implements CommandLineRunner {
+public class HibernateWithGenericJPA {//implements CommandLineRunner {
 
     private Logger logger = LoggerFactory.logger(this.getClass());
 
+    @Autowired
+    StudentRepository repository;
+
     public static void main(String[] args) {
-        SpringApplication.run(HibernateWithJPAWithH2.class, args);
+        SpringApplication.run(HibernateWithGenericJPA.class, args);
 
     }
 }
