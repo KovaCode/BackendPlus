@@ -65,8 +65,9 @@ public class UserServiceimpl implements IUserService {
 
 
     @Override
-    public List<UserDto> getAllUsers() {
-        return userRepository.findAll().stream().map(UserConverter::entityToDto).collect(Collectors.toList());
+    public ResponseEntity<List<UserDto>> getAllUsers() {
+        List<UserDto> userDtoList = userRepository.findAll().stream().map(UserConverter::entityToDto).collect(Collectors.toList());
+        return new ResponseEntity<>(userDtoList, HttpStatus.OK);
     }
 
     @Override

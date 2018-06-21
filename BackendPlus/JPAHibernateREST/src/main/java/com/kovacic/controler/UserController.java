@@ -26,7 +26,7 @@ public class UserController {
 	}
 
 	@RequestMapping(Constants.GET_ALL_USERS)
-	public List<UserDto> getAllUsers() {
+	public ResponseEntity<List<UserDto>> getAllUsers() {
 		return userService.getAllUsers();
 	}
 

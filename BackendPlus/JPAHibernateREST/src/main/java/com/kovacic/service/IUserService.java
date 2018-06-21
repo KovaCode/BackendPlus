@@ -19,7 +19,7 @@ public interface IUserService {
 
     ResponseEntity<UserDto> updateUser(Long userId, UserDto userDto);
 
-    List<UserDto> getAllUsers();
+    ResponseEntity<List<UserDto>> getAllUsers();
 
     ResponseEntity deleteUser(UserDto userDto);
 }

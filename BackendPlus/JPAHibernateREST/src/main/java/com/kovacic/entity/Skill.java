@@ -7,7 +7,7 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name = "skill")
-public class Skill  {
+public class Skill {
     @Column
     @Id
     @GeneratedValue
@@ -28,7 +28,7 @@ public class Skill  {
     }
 
 
-	public Long getID() {
+    public Long getID() {
         return ID;
     }
 
@@ -43,5 +43,4 @@ public class Skill  {
     public void setSkillName(String name) {
         this.name = name;
     }
-
 }

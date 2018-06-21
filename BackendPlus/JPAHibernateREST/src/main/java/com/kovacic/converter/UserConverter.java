@@ -7,12 +7,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by ikovaci.
+ * Created by ikovacic
  */
 public class UserConverter {
     public static User dtoToEntity(UserDto userDto) {
         User user = new User(userDto.getFirstName(), userDto.getLastName(), userDto.getUserName(), userDto.getPassword(), userDto.getEmail(), SkillConverter.dtoToEntityList(userDto.getSkillDtos()), userDto.getNote());
-        user.setID(userDto.getID());
+//        user.setID(userDto.getID());
         return user;
     }
 

@@ -6,10 +6,9 @@ import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
 import java.util.List;
-
 /**
- * Created by ikovacic.
- */
+        * Created by ikovacic.
+        */
 @Entity
 @Table(name = "user")
 @DynamicInsert()
@@ -40,9 +39,13 @@ public class User extends AuditModel {
 
     @JoinColumn(name = "user_id")
     @ManyToMany(
-            cascade = CascadeType.ALL,
             fetch = FetchType.EAGER)
     private List<Skill> skill;
+
+    @OneToOne(fetch = FetchType.LAZY,
+            cascade =  CascadeType.ALL,
+            mappedBy = "user")
+    private SystemLogin systemLogin;
 
     public User() {
     }
@@ -131,4 +134,11 @@ public class User extends AuditModel {
     }
 
 
+    public SystemLogin getSystemLogin() {
+        return systemLogin;
+    }
+
+    public void setSystemLogin(SystemLogin systemLogin) {
+        this.systemLogin = systemLogin;
+    }
 }

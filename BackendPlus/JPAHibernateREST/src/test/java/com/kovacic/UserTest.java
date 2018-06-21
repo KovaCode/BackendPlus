@@ -43,12 +43,18 @@ public class UserTest extends AbstractTestNGSpringContextTests {
         user.setPassword("Test@101.");
         user.setEmail(email);
         user.setNote("notifications");
+
         user.setSkillDtos(skillService.getSkills().getBody());
 
         ResponseEntity<UserDto> response = userService.saveUser(user);
         Assert.assertEquals(response.getStatusCode(), HttpStatus.ACCEPTED);
 
-        userID = user.getID();
+        response = userService.getUserByEmail(email);
+
+        userID = response.getBody().getID();
+        System.err.println("ID: " + userID);
+
+
     }
 
     @Test(priority = 20)
@@ -68,7 +74,7 @@ public class UserTest extends AbstractTestNGSpringContextTests {
 
     @Test(priority = 30)
     public void testReadUser() {
-        List<UserDto> response = userService.getAllUsers();
+        List<UserDto> response = userService.getAllUsers().getBody();
 
         for (UserDto user :response) {
             System.err.println(user.getEmail());
