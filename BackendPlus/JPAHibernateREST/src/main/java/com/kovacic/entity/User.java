@@ -25,12 +25,6 @@ public class User extends AuditModel {
     @Column(nullable = false, length = 50)
     private String password;
 
-    @Column(nullable = false, length = 100)
-    private String firstName;
-
-    @Column(nullable = false, length = 100)
-    private String lastName;
-
     @Column(nullable = false, length = 150, unique = true)
     private String email;
 
@@ -47,21 +41,29 @@ public class User extends AuditModel {
             mappedBy = "user")
     private SystemLogin systemLogin;
 
+    @OneToOne(cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY,
+            mappedBy = "user")
+
+//    @JoinTable(name="user_profile",
+//            joinColumns={@JoinColumn(name="id_user", referencedColumnName="id")},
+//            inverseJoinColumns={@JoinColumn(name="id_profile", referencedColumnName="id")})
+    private UserProfile userProfile;
+
+
     public User() {
     }
 
 
-    public User(String firstName, String lastName, String userName, String password, String email) {
-        this.firstName = firstName;
-        this.lastName = lastName;
+    public User(String userName, String password, String email) {
+//        this.firstName = firstName;
+//        this.lastName = lastName;
         this.userName = userName;
         this.password = password;
         this.email = email;
     }
 
-    public User(String firstName, String lastName, String userName, String password, String email, List<Skill> skills, String note) {
-        this.firstName = firstName;
-        this.lastName = lastName;
+    public User(String userName, String password, String email, List<Skill> skills, String note) {
         this.userName = userName;
         this.password = password;
         this.email = email;
@@ -91,22 +93,6 @@ public class User extends AuditModel {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
     }
 
     public String getEmail() {
@@ -140,5 +126,13 @@ public class User extends AuditModel {
 
     public void setSystemLogin(SystemLogin systemLogin) {
         this.systemLogin = systemLogin;
+    }
+
+    public UserProfile getUserProfile() {
+        return userProfile;
+    }
+
+    public void setUserProfile(UserProfile userProfile) {
+        this.userProfile = userProfile;
     }
 }

@@ -23,7 +23,6 @@ public class SystemLoginDto {
         this.userId = userId;
     }
 
-
     public Long getID() {
         return ID;
     }

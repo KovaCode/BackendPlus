@@ -2,9 +2,6 @@ package com.kovacic.repository;
 
 import com.kovacic.entity.SystemLogin;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Modifying;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -13,9 +10,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface SystemLoginRepository extends JpaRepository<SystemLogin, Long> {
 
-    @Modifying(clearAutomatically = true)
-    @Query("UPDATE system_login s SET s.logged = :looged WHERE c.id = :userId")
-    int setLogged(@Param("looged") boolean login, @Param("userId") Long userId);
-
-
+//    @Modifying(clearAutomatically = true)
+//    @Query("UPDATE system_login s SET s.logged = :logged WHERE s.userId = :userId")
+//    int setLogged(@Param("logged") boolean login, @Param("userId") Long userId);
 }

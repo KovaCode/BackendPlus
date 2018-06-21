@@ -37,8 +37,6 @@ public class UserTest extends AbstractTestNGSpringContextTests {
     @Test(priority = 10)
     public void testCreateUser() {
         UserDto user = new UserDto();
-        user.setFirstName("Testing");
-        user.setLastName("Tester");
         user.setUserName("Test101");
         user.setPassword("Test@101.");
         user.setEmail(email);
@@ -62,8 +60,6 @@ public class UserTest extends AbstractTestNGSpringContextTests {
         ResponseEntity<UserDto> response = userService.getUserByEmail(email);
 
         System.err.println(response.getBody().getEmail());
-        System.err.println(response.getBody().getFirstName());
-        System.err.println(response.getBody().getLastName());
         System.err.println(response.getBody().getUserName());
         System.err.println(response.getBody().getNote());
 
@@ -78,8 +74,6 @@ public class UserTest extends AbstractTestNGSpringContextTests {
 
         for (UserDto user :response) {
             System.err.println(user.getEmail());
-            System.err.println(user.getFirstName());
-            System.err.println(user.getLastName());
             System.err.println(user.getUserName());
             System.err.println(user.getNote());
         }
@@ -91,8 +85,6 @@ public class UserTest extends AbstractTestNGSpringContextTests {
         ResponseEntity<UserDto> response = userService.getUserById(userID);
 
         System.err.println(response.getBody().getEmail());
-        System.err.println(response.getBody().getFirstName());
-        System.err.println(response.getBody().getLastName());
         System.err.println(response.getBody().getUserName());
         System.err.println(response.getBody().getNote());
 

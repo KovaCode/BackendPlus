@@ -26,8 +26,6 @@ public class SystemLoginController {
     }
 
 
-
-
     @RequestMapping(Constants.GET_ALL_LOGINS)
     public ResponseEntity<List<SystemLoginDto>> getAllSytemLogins() {
         return systemLoginService.getAllSystemLogins();

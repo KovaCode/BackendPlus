@@ -20,13 +20,26 @@ public class SystemLoginServiceImpl implements ISystemLoginService {
 
     @Override
     public ResponseEntity setLogged(boolean logged, Long userId) {
-        systemLoginRepository.setLogged(logged, userId);
+//        systemLoginRepository.setLogged(logged, userId);
         return new ResponseEntity<>(HttpStatus.ACCEPTED);
     }
 
     @Override
     public ResponseEntity<List<SystemLoginDto>> getAllSystemLogins() {
         List<SystemLoginDto> systemLoginDtoList = systemLoginRepository.findAll().stream().map(SystemLoginConverter::entityToDto).collect(Collectors.toList());
+
+
+        System.err.println("----------------------------------------------------");
+        for (SystemLoginDto login :systemLoginDtoList){
+            System.err.println("**********");
+            System.err.println("ID: " + login.getID());
+            System.err.println("Wrong login count: " + login.getWrongLoginCount());
+            System.err.println("Logged: " + login.isLogged());
+            System.err.println("User Id: " + login.getUserId());
+            System.err.println("**********\n");
+        }
+        System.err.println("----------------------------------------------------");
+
         return new ResponseEntity<>(systemLoginDtoList, HttpStatus.OK);
     }
 

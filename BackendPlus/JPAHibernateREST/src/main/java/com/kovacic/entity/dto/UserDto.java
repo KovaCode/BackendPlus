@@ -10,8 +10,6 @@ public class UserDto {
     private Long ID;
     private String userName;
     private String password;
-    private String firstName;
-    private String lastName;
     private String email;
     private List<SkillDto> skillDtos = new ArrayList<>();
     private String note;
@@ -19,56 +17,46 @@ public class UserDto {
     public UserDto() {
     }
 
-    public UserDto(Long id, String firstName, String lastName, String userName, String password, String email, String note) {
+    public UserDto(Long id, String userName, String password, String email, String note) {
         this.ID = id;
         this.userName = userName;
         this.password = password;
-        this.firstName = firstName;
-        this.lastName = lastName;
         this.email = email;
         this.skillDtos = null;
         this.note = note;
     }
 
-    public UserDto(Long id, String firstName, String lastName, String userName, String password, String email, List<SkillDto> skillDtos) {
+    public UserDto(Long id, String userName, String password, String email, List<SkillDto> skillDtos) {
         this.ID = id;
         this.userName = userName;
         this.password = password;
-        this.firstName = firstName;
-        this.lastName = lastName;
         this.email = email;
         this.skillDtos = skillDtos;
 //        this.note = null;
     }
 
-    public UserDto(Long id, String firstName, String lastName, String userName, String password, String email, List<SkillDto> skillDtos, String note) {
+    public UserDto(Long id, String userName, String password, String email, List<SkillDto> skillDtos, String note) {
         this.ID = id;
         this.userName = userName;
         this.password = password;
-        this.firstName = firstName;
-        this.lastName = lastName;
         this.email = email;
         this.skillDtos = skillDtos;
         this.note = note;
     }
 
-    public UserDto(String firstName, String lastName, String userName, String password, String email, List<SkillDto> skillDtos, String note) {
+    public UserDto(String userName, String password, String email, List<SkillDto> skillDtos, String note) {
         this.userName = userName;
         this.password = password;
-        this.firstName = firstName;
-        this.lastName = lastName;
         this.email = email;
         this.skillDtos = skillDtos;
         this.note = note;
     }
 
 
-    public UserDto(Long id, String firstName, String lastName, String userName, String password, String email) {
+    public UserDto(Long id, String userName, String password, String email) {
         this.ID = id;
         this.userName = userName;
         this.password = password;
-        this.firstName = firstName;
-        this.lastName = lastName;
         this.email = email;
         this.skillDtos = null;
 //        this.note = null;
@@ -100,21 +88,6 @@ public class UserDto {
         this.password = password;
     }
 
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
 
     public String getEmail() {
         return email;

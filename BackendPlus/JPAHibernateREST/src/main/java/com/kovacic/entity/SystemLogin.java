@@ -1,5 +1,6 @@
 package com.kovacic.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
@@ -27,9 +28,13 @@ public class SystemLogin {
     @Column(name = "logged", nullable = false, updatable = false)
     boolean logged;
 
+    @JsonIgnore
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
+//
+//    @Column
+//    private Long userId;
 
 
     public SystemLogin() {
@@ -40,14 +45,12 @@ public class SystemLogin {
         this.wrongLoginCount = wrongLoginCount;
         this.lastLogin = lastLogin;
         this.logged = logged;
-//        this.user = user;
     }
 
     public SystemLogin(int wrongLoginCount, Date lastLogin, boolean logged) {
         this.wrongLoginCount = wrongLoginCount;
         this.lastLogin = lastLogin;
         this.logged = logged;
-//        this.user = user;
     }
 
 
@@ -90,4 +93,5 @@ public class SystemLogin {
     public void setUser(User user) {
         this.user = user;
     }
+
 }
