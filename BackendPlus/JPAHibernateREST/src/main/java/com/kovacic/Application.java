@@ -1,22 +1,19 @@
 package com.kovacic;
 
-import com.kovacic.entity.Skill;
-import com.kovacic.entity.SystemLogin;
-import com.kovacic.entity.User;
-import com.kovacic.entity.UserProfile;
+import com.kovacic.entity.*;
 import com.kovacic.enumerator.Gender;
-import com.kovacic.repository.SkillRepository;
-import com.kovacic.repository.SystemLoginRepository;
-import com.kovacic.repository.UserProfileRepository;
-import com.kovacic.repository.UserRepository;
+import com.kovacic.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.util.DigestUtils;
 
 import javax.annotation.PostConstruct;
+import java.io.IOException;
+import java.nio.file.Files;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -41,10 +38,19 @@ public class Application {
     UserRepository userRepository;
 
     @Autowired
+    BlogRepository blogRepository;
+
+    @Autowired
+    CommentRepository commentRepository;
+
+    @Autowired
     SystemLoginRepository systemLoginRepository;
 
     @Autowired
     UserProfileRepository userProfileRepository;
+
+    @Autowired
+    FileRepository fileRepository;
 
 
     public static void main(String[] args) {
@@ -54,15 +60,40 @@ public class Application {
 
     @PostConstruct
     public void setupDbWithData() {
-
+        byte[] data = new byte[0];
         // 1. add skills //
         List<Skill> skillList = new ArrayList<>(Arrays.asList(new Skill("Java"), new Skill("SQL")));
-        for (Skill skill :skillList) {
+        for (Skill skill : skillList) {
             skillRepository.save(skill);
         }
 
+        try {
+            java.io.File file = new ClassPathResource("robbie.jpg").getFile();
+
+
+            byte [] fileBytes = Files.readAllBytes(file.toPath());
+            char singleChar;
+            for(byte b : fileBytes) {
+                singleChar = (char) b;
+                System.out.print(singleChar);
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        File file = new File();
+        file.setDescription("test");
+        file.setFile(data);
+        file.setType("jpg");
+        file.setName("robbie");
+
+
+        fileRepository.save(file);
+
+
         // 2. add user //
-        User user = new User( "smith", DigestUtils.md5Digest("123test".getBytes()).toString(), "smithy@gmail.com");
+        User user = new User("smith", DigestUtils.md5Digest("123test".getBytes()).toString(), "smithy@gmail.com");
         user.setSkills(skillList);
         user = userRepository.save(user);
 
@@ -80,31 +111,55 @@ public class Application {
         userProfile.setGender(Gender.MALE);
         userProfile.setEmail("john.smith@testing.co");
         userProfile.setUser(user);
+
+
+        userProfile.setImage(file);
         userProfileRepository.save(userProfile);
 //        userRepository.save(user);
 
 //        for (User userItem : userList) {
-            if (userRepository.findByEmail(user.getEmail()) == null) {
-                user.setNote("Test");
+        if (userRepository.findByEmail(user.getEmail()) == null) {
+            user.setNote("Test");
 
-                List<Skill> skillListFromRepo = skillRepository.findAll();
+            List<Skill> skillListFromRepo = skillRepository.findAll();
 
-                user.setSkills(skillListFromRepo);
-                userRepository.save(user);
-            }
+            user.setSkills(skillListFromRepo);
+            userRepository.save(user);
+        }
 //        }
 
         SystemLogin systemLogin = new SystemLogin(3, new Date(), false);
         user.setSystemLogin(systemLogin);
         systemLogin.setUser(user);
         userRepository.save(user);
+
+
+        Comment comment = new Comment();
+        comment.setComment("This is my comment");
+        comment.setUser(user);;
+        commentRepository.save(comment);
+
+        Comment comment2 = new Comment();
+        comment2.setComment("This is my comment no.2");
+        comment2.setUser(user);
+
+        commentRepository.save(comment2);
+
+
+        Blog blog = new Blog();
+        blog.setTitle("This is an title");
+        blog.setContent("This is my new blog about how to handle all aspects of user...");
+//        blog.setAttachment();
+        blog.setUserId(user);
+        blog.setComments(Arrays.asList(comment, comment2));
+        blogRepository.save(blog);
+
+
+
+
+
     }
 }
-
-
-
-
-
 
 
 //

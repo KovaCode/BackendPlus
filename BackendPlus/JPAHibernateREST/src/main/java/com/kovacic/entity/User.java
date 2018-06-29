@@ -44,6 +44,7 @@ public class User extends AuditModel {
     @OneToOne(cascade = CascadeType.ALL,
             fetch = FetchType.LAZY,
             mappedBy = "user")
+//    @JoinColumn(name = "profile_id")
 
 //    @JoinTable(name="user_profile",
 //            joinColumns={@JoinColumn(name="id_user", referencedColumnName="id")},

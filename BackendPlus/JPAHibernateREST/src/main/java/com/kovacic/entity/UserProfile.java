@@ -62,16 +62,12 @@ public class UserProfile extends AuditModel {
     private String note;
 
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
-//    @JoinTable(name="user_profile",
-//            joinColumns={@JoinColumn(name="id_profile", referencedColumnName="id")},
-//            inverseJoinColumns={@JoinColumn(name="id_user", referencedColumnName="id")})
     private User user;
 
-
-//    @Column
-//    private Lob image;
-
+    @JoinColumn(name = "image_id")
+    @OneToOne(
+            fetch = FetchType.EAGER)
+    private File image;
 
     public UserProfile() {
     }
