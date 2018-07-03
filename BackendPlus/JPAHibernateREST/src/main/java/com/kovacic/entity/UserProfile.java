@@ -1,6 +1,7 @@
 package com.kovacic.entity;
 
 import com.kovacic.entity.base.AuditModel;
+import com.kovacic.enumerator.Country;
 import com.kovacic.enumerator.Gender;
 import lombok.Getter;
 import lombok.Setter;
@@ -36,6 +37,12 @@ public class UserProfile extends AuditModel {
 
     @Enumerated(EnumType.STRING)
     private Gender gender;
+
+    @Enumerated(EnumType.STRING)
+    private Country country;
+
+    @Column(length = 10)
+    private String postalCode;
 
 //    @ElementCollection(targetClass = Country.class)
 //    @CollectionTable(name = "country", joinColumns = @JoinColumn(name = "country_id"))

@@ -37,6 +37,10 @@ public class User extends AuditModel {
     private List<Skill> skill;
 
     @OneToOne(fetch = FetchType.LAZY,
+            cascade =  CascadeType.ALL)
+    private Priviledges priviledge;
+
+    @OneToOne(fetch = FetchType.LAZY,
             cascade =  CascadeType.ALL,
             mappedBy = "user")
     private SystemLogin systemLogin;
@@ -135,5 +139,13 @@ public class User extends AuditModel {
 
     public void setUserProfile(UserProfile userProfile) {
         this.userProfile = userProfile;
+    }
+
+    public Priviledges getPriviledge() {
+        return priviledge;
+    }
+
+    public void setPriviledge(Priviledges priviledge) {
+        this.priviledge = priviledge;
     }
 }

@@ -1,6 +1,6 @@
 package com.kovacic.entity.dto;
 
-import com.kovacic.entity.Country;
+import com.kovacic.enumerator.Country;
 import com.kovacic.enumerator.Gender;
 import lombok.Getter;
 import lombok.Setter;

@@ -1,6 +1,7 @@
 package com.kovacic;
 
 import com.kovacic.entity.*;
+import com.kovacic.enumerator.Country;
 import com.kovacic.enumerator.Gender;
 import com.kovacic.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +28,7 @@ import java.util.List;
 
 
 @EntityScan(basePackages = "com.kovacic.entity")
-@ComponentScan
+@ComponentScan //({"com.kovacic", "com.kovacic.configs"})
 @SpringBootApplication
 public class Application {
 
@@ -52,6 +53,8 @@ public class Application {
     @Autowired
     FileRepository fileRepository;
 
+    @Autowired
+    PriviledgesRepository priviledgesRepository;
 
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
@@ -61,10 +64,29 @@ public class Application {
     @PostConstruct
     public void setupDbWithData() {
         byte[] data = new byte[0];
-        // 1. add skills //
+
+        Priviledges priviledges = new Priviledges();
+        priviledges.setLevel(100);
+        priviledges.setName("Admin");
+
+        Priviledges priviledges2 = new Priviledges();
+        priviledges2.setLevel(1);
+        priviledges2.setName("Rookie");
+
+        if(priviledgesRepository.count()==0) {
+            priviledgesRepository.save(priviledges);
+            priviledgesRepository.save(priviledges2);
+        }
+
+
         List<Skill> skillList = new ArrayList<>(Arrays.asList(new Skill("Java"), new Skill("SQL")));
-        for (Skill skill : skillList) {
-            skillRepository.save(skill);
+
+        if(skillRepository.count()==0) {
+            // 1. add skills //
+
+            for (Skill skill : skillList) {
+                skillRepository.save(skill);
+            }
         }
 
         try {
@@ -87,23 +109,22 @@ public class Application {
         file.setFile(data);
         file.setType("jpg");
         file.setName("robbie");
-
-
         fileRepository.save(file);
 
 
         // 2. add user //
         User user = new User("smith", DigestUtils.md5Digest("123test".getBytes()).toString(), "smithy@gmail.com");
         user.setSkills(skillList);
+        user.setPriviledge(priviledges);
         user = userRepository.save(user);
 
         // 3. add user-profile //
         UserProfile userProfile = new UserProfile();
         userProfile.setFirstName("John");
         userProfile.setLastName("Smith");
-        userProfile.setAddress1("test1");
+        userProfile.setAddress1("Ulica Jablanova 11");
         userProfile.setMobileNumber("099999999");
-//        userProfile.setCountry();
+        userProfile.setCountry(Country.CROATIA);
 
         LocalDate localDate = LocalDate.of(1985, 9, 11);
         userProfile.setBirthday(localDate);
@@ -136,13 +157,12 @@ public class Application {
 
         Comment comment = new Comment();
         comment.setComment("This is my comment");
-        comment.setUser(user);;
+        comment.setUser(user);
         commentRepository.save(comment);
 
         Comment comment2 = new Comment();
         comment2.setComment("This is my comment no.2");
         comment2.setUser(user);
-
         commentRepository.save(comment2);
 
 
@@ -153,8 +173,6 @@ public class Application {
         blog.setUserId(user);
         blog.setComments(Arrays.asList(comment, comment2));
         blogRepository.save(blog);
-
-
 
 
 
