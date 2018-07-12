@@ -5,15 +5,16 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 /**
         * Created by ikovacic.
         */
 @Entity
-@Table(name = "comment")
+@Table(name = "comments")
 @Getter
 @Setter
-public class Comment extends AuditModel {
+public class Comment extends AuditModel implements Serializable {
     @Column
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

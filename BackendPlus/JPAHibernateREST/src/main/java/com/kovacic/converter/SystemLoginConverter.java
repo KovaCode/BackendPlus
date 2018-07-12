@@ -4,9 +4,6 @@ import com.kovacic.entity.SystemLogin;
 import com.kovacic.entity.dto.SystemLoginDto;
 import org.modelmapper.ModelMapper;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * Created by ikovaci.
  */
@@ -31,14 +28,14 @@ public class SystemLoginConverter {
 
     }
 
-    public static List<SystemLoginDto> entityToDtList(List<SystemLogin> listSystemLogin) {
-        List<SystemLoginDto> systemLoginDtoList = new ArrayList<>();
-
-        for (SystemLogin systemLogin : listSystemLogin) {
-            SystemLoginDto systemLoginDto = new SystemLoginDto(systemLogin.getID(), systemLogin.getWrongLoginCount(), systemLogin.getLastLogin(), systemLogin.isLogged(), systemLogin.getUser().getID());
-            systemLoginDtoList.add(systemLoginDto);
-        }
-
-        return systemLoginDtoList;
-    }
+//    public static List<SystemLoginDto> entityToDtList(List<SystemLogin> listSystemLogin) {
+//        List<SystemLoginDto> systemLoginDtoList = new ArrayList<>();
+//
+//        for (SystemLogin systemLogin : listSystemLogin) {
+//            SystemLoginDto systemLoginDto = new SystemLoginDto(systemLogin.getID(), systemLogin.getWrongLoginCount(), systemLogin.getLastLogin(), systemLogin.isLogged(), systemLogin.getUser().getID());
+//            systemLoginDtoList.add(systemLoginDto);
+//        }
+//
+//        return systemLoginDtoList;
+//    }
 }

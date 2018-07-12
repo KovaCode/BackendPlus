@@ -42,7 +42,7 @@ public class UserTest extends AbstractTestNGSpringContextTests {
         user.setEmail(email);
         user.setNote("notifications");
 
-        user.setSkillDtos(skillService.getSkills().getBody());
+//        user.setSkillDtos(skillService.getSkills().getBody());
 
         ResponseEntity<UserDto> response = userService.saveUser(user);
         Assert.assertEquals(response.getStatusCode(), HttpStatus.ACCEPTED);

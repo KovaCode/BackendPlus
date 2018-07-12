@@ -1,4 +1,4 @@
-package com.kovacic.controler;
+package com.kovacic.controler.rest;
 
 import com.kovacic.entity.dto.UserDto;
 import com.kovacic.service.IUserService;
@@ -13,7 +13,7 @@ import java.util.List;
 /**
  * Created by ikovacic
  */
-@RequestMapping("/user")
+@RequestMapping("/users")
 @RestController
 public class UserController {
 

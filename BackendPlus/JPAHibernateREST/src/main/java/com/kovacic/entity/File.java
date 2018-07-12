@@ -4,15 +4,16 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 /**
  * Created by ikovacic.
  */
 @Entity
-@Table(name = "file")
+@Table(name = "files")
 @Getter
 @Setter
-public class File {
+public class File implements Serializable {
     @Column
     @Id
     @GeneratedValue
@@ -23,8 +24,10 @@ public class File {
     private String type;
     @Column
     private String description;
-    @Column(nullable = false)
-    private byte[] file;
+    @Lob
+    @Column(name="pic")
+    private byte[] pic;
 
-
+    public File() {
+    }
 }

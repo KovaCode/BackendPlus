@@ -33,7 +33,7 @@ public class UserServiceimpl implements IUserService {
 
     @Override
     public ResponseEntity<UserDto> getUserById(Long userId) {
-        User user = userRepository.getOne(userId);
+        User user =  userRepository.findById(userId).get();
         return new ResponseEntity<>(UserConverter.entityToDto(user), HttpStatus.OK);
     }
 

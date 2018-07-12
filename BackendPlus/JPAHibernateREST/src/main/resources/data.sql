@@ -1,3 +1,5 @@
+
+delete from user_skill;
 delete from skill;
 
 insert into skill (name) values ('Java');

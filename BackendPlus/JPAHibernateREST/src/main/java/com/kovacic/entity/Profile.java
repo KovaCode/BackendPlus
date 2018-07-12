@@ -7,21 +7,21 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.math.BigInteger;
 import java.time.LocalDate;
+import java.util.List;
 
 /**
  * Created by ikovacic.
  */
-@Entity(name = "profile")
-@Table(name = "profile")
+@Entity(name = "profiles")
+@Table(name = "profiles")
 @Setter
 @Getter
-public class UserProfile extends AuditModel {
+public class Profile extends AuditModel {
     @Column
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long ID;
+    private Long id;
 
     @Column(nullable = false, length = 100)
     private String firstName;
@@ -44,14 +44,8 @@ public class UserProfile extends AuditModel {
     @Column(length = 10)
     private String postalCode;
 
-//    @ElementCollection(targetClass = Country.class)
-//    @CollectionTable(name = "country", joinColumns = @JoinColumn(name = "country_id"))
-//    @Column(name = "country", nullable = false)
-//    @Enumerated(EnumType.STRING)
-//    ArrayList<Country> country;
-
     @Column(length = 10)
-    private BigInteger phoneNumber;
+    private String phoneNumber;
 
     @Column(length = 10)
     private String mobileNumber;
@@ -68,15 +62,22 @@ public class UserProfile extends AuditModel {
     @Column(length = 100)
     private String note;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    private User user;
-
-    @JoinColumn(name = "image_id")
     @OneToOne(
             fetch = FetchType.EAGER)
     private File image;
 
-    public UserProfile() {
+    @OneToOne(cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY,
+            mappedBy = "profile")
+    private User user;
+
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinColumn(name = "profile_id")
+    private List<Skill> skill;
+
+
+    public Profile() {
     }
 
 

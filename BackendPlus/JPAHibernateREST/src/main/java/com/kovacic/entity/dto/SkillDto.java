@@ -1,14 +1,20 @@
 package com.kovacic.entity.dto;
 
+import lombok.Getter;
+import lombok.Setter;
+
 /**
  * Created by ikovacic.
  */
+
+@Getter
+@Setter
 public class SkillDto {
-    Long ID;
+    Long id;
     String name;
 
     public SkillDto(Long id, String name) {
-        this.ID = id;
+        this.id = id;
         this.name = name;
     }
 
@@ -19,19 +25,4 @@ public class SkillDto {
     public SkillDto() {
     }
 
-    public Long getID() {
-        return ID;
-    }
-
-    public void setID(Long id) {
-        this.ID = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
 }

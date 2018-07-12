@@ -1,19 +1,31 @@
 package com.kovacic.entity;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.*;
 
 /**
  * Created by ikovacic.
  */
 @Entity
-@Table(name = "skill")
+@Table(name = "skills")
+@Getter
+@Setter
 public class Skill {
     @Column
     @Id
     @GeneratedValue
-    private Long ID;
+    private Long id;
+
     @Column(unique = true)
     private String name;
+
+//    @ManyToOne
+////    @JoinColumn(name="profile")
+//    private Profile profile;
+
+
 
     public Skill() {
     }
@@ -23,24 +35,8 @@ public class Skill {
     }
 
     public Skill(Long ID, String name) {
-        this.ID = ID;
+        this.id = ID;
         this.name = name;
     }
 
-
-    public Long getID() {
-        return ID;
-    }
-
-    public void setSkillId(Long ID) {
-        this.ID = ID;
-    }
-
-    public String getSkillName() {
-        return name;
-    }
-
-    public void setSkillName(String name) {
-        this.name = name;
-    }
 }

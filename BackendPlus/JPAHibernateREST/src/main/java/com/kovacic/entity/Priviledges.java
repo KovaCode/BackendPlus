@@ -25,8 +25,19 @@ public class Priviledges implements Serializable {
     @Column(nullable = false, unique = true)
     private int level;
 
+    @OneToOne(cascade = CascadeType.ALL,
+            fetch = FetchType.EAGER,
+            mappedBy = "priviledges")
+    private User user;
+
 
     public Priviledges() {
+    }
+
+
+    public Priviledges(String name, int level) {
+        this.name = name;
+        this.level = level;
     }
 
 }

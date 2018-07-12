@@ -4,15 +4,16 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 /**
         * Created by ikovacic.
         */
 @Entity
-@Table(name = "category")
+@Table(name = "categories")
 @Getter
 @Setter
-public class Category {
+public class Category implements Serializable {
     @Column
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

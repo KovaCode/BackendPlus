@@ -1,4 +1,4 @@
-package com.kovacic.controler;
+package com.kovacic.controler.rest;
 
 import com.kovacic.entity.dto.SystemLoginDto;
 import com.kovacic.service.ISystemLoginService;

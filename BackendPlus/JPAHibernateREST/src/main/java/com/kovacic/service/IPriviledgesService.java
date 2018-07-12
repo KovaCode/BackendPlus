@@ -8,8 +8,6 @@ import org.springframework.http.ResponseEntity;
  */
 public interface IPriviledgesService {
 
-
-
     ResponseEntity<PriviledgesDto> getOne(Long id);
 
     ResponseEntity save(PriviledgesDto priviledgesDto);
